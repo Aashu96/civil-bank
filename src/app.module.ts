@@ -2,12 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { User } from './user/user.entity';
-import { UserService } from './user/user.service';
-import { PassportModule, PassportStrategy } from '@nestjs/passport';
-import { JwtStrategy } from './jwt.strategy';
 import { config } from "dotenv";
+import { LoanApplicationModule } from './loan-application/loan-application.module';
+import { UserModule } from './user/UserModule';
+import { DepositSlipModule } from './deposit-slip/deposit-slip.module';
 config()
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -21,11 +19,8 @@ config()
         }
     },
     logging:true,
-  }), TypeOrmModule.forFeature([User]),JwtModule.register({
-    secret:'SECRET',
-    signOptions:{expiresIn:'60s'}
-  }),PassportModule],      
+  }), UserModule, LoanApplicationModule, DepositSlipModule],      
   controllers: [AppController],
-  providers: [AppService,UserService,JwtStrategy],
+  providers: [AppService],
 })
 export class AppModule {}
