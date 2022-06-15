@@ -43,7 +43,7 @@ export class AppController {
     }
     @Get('/')
     async hello(){
-        console.log('hello working perfectly');
+     return {message:"Working Perfectly"};
     }
        
            
