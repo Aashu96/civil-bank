@@ -13,7 +13,6 @@ config()
   imports: [TypeOrmModule.forRoot({
     type: 'postgres',
     url:process.env.DB_URL,
-    port: 5432,
     entities: [__dirname+'/**/*.entity{.ts,.js}'],
     synchronize:true,
     extra:{

@@ -8,7 +8,9 @@ async function bootstrap(){
     credentials:true,
     origin:'http//:localhost:3000'
   })
-  await app.listen(process.env.PORT || 3000);
+  const PORT=process.env.PORT;
+  console.log(PORT);
+  await app.listen(`PORT NO:::${PORT}`);
   
 }
 bootstrap();
