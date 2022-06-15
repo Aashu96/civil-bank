@@ -12,7 +12,7 @@ config()
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'postgres',
-    url:'postgres://yocbkfuxctqlsu:675efe26850643c606cbf023cf526d03f94d57beec8d5345127376c8f69eb17c@ec2-52-72-56-59.compute-1.amazonaws.com:5432/d69vkn8td3j74',
+    url:'postgres://hfrntvcjqktiam:11aedd91c4c1059b6b766954ed1ff94a03f65b96d528261757a082c254dea221@ec2-18-210-64-223.compute-1.amazonaws.com:5432/dfji8fhdr58j8p',
     entities: [__dirname+'/**/*.entity{.ts,.js}'],
     synchronize:true,
     extra:{
