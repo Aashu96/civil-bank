@@ -6,7 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller()
 export class AppController {
   constructor(private readonly userService:UserService,private jwtService:JwtService) {}
-  @Post('login')
+  @Post('/login')
   async login( 
     @Body('email')email:string,
     @Body('password')password:string,
@@ -23,7 +23,7 @@ export class AppController {
 
     
   }
-  @Post('register')
+  @Post('/register')
   async register(
     @Body('name')name:string,
     @Body('email')email:string,
@@ -37,9 +37,13 @@ export class AppController {
     );
   }
     @UseGuards(AuthGuard('jwt'))  
-    @Get('user')
+    @Get('/user')
     async user(@Req() req){
         return req.user;
+    }
+    @Get('/')
+    async hello(){
+        console.log('hello working perfectly');
     }
        
            
