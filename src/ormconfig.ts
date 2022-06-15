@@ -2,12 +2,17 @@ import {  TypeOrmModuleOptions } from "@nestjs/typeorm";
 
 export const config:TypeOrmModuleOptions={
     type: 'postgres',
-    host: 'localhost',
+    host: process.env.DB_HOST,
     port: 5432,
-    username: 'postgres',
-    password: 'chawla12345',
-    database: 'CivilBank',
+    username:process.env.DB_USER,
+    password:process.env.DB_PASS,
+    database:process.env.DB_NAME,
     entities: [__dirname+'/**/*.entity{.ts,.js}'],
     synchronize:true,
+    extra:{
+        ssl:{
+            rejectUnauthorized:false
+        }
+    },
     logging:true,   
 }
