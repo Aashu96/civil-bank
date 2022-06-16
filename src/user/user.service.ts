@@ -38,7 +38,7 @@ export class UserService {
     async generateToken(payload:User){
         return this.jwtService.sign(payload);
     }
-    
+            
   }
  
 

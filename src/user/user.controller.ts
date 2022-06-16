@@ -1,8 +1,9 @@
 import { BadRequestException, Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
+import { JwtStrategy } from 'src/jwt.strategy';
+import { JwtAuthGuard } from 'src/jwt-auth.guard';
 @Controller()
 export class UserController {
     constructor(private readonly userService:UserService,private jwtService:JwtService   
@@ -19,9 +20,8 @@ export class UserController {
       
       if(! await bcrypt.compare(password,user.password))
         throw new BadRequestException('Invalid Credential');
-      return {
-        jwt: await this.userService.generateToken({id:user.id,email:user.email})
-      };         
+      
+      return {jwt:await this.userService.generateToken({id:user.id,email:user.email})}       
 }
 @Post('/register')
 async register(
@@ -37,7 +37,7 @@ async register(
   );
 }
 
-@UseGuards(AuthGuard('jwt'))  
+@UseGuards(JwtAuthGuard)  
 @Get('/user')
 async user(@Req() req){
     return req.user;
